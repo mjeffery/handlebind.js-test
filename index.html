@@ -17,6 +17,8 @@
 			<label {{class cssClass}}>First Name:</label>&nbsp;{{text firstName}}</br>
 			<label>Last Name:</label>&nbsp;{{text lastName}}</br>
 			<label>Name:</label>&nbsp;{{text fullName unbound=true}}</br>
+			<label>Unused: </label><input type="checkbox"></input></br>
+			<label>Leader?</label>&nbsp;<input type="checkbox" {{checked isLeader}}/><button {{events click=toggleLeader}}>toggle</button></br>
 			{{#if showNested}}
 				{{#with nested}}
 					<label>First Name: </label><input type="text" {{value firstName update="keyup"}} {{hasFocus isSelected}}/>
@@ -31,8 +33,21 @@
             <a href="javascript:void(0)" {{{events click=toggleNames}}}>Toggle the Names!</a>
 			</br>
 			<a href="javascript:void(0)" {{{events click=toggleNested}}}>Toggle Nested</a></br>
-			<a href="javascript:void(0)" {{{events click= toggleColors}}}>Toggle Colors</a></br>
+			<a href="javascript:void(0)" {{{events click=toggleColors}}}>Toggle Colors</a></br>
+			</hr>
+			<textarea {{enabled editable}}></textarea>
+			<button {{events click=setIsEditable}}>{{text editableToggleButtonName}}</button></br>
+			<textarea {{disabled notEditable}}></textarea>
+			<button {{events click=setIsNotEditable}}>{{text notEditableToggleButtonName}}</button></br>
 		</script>
 		<div id='app-container'></div></br>
+		<div id='test-container'>
+			<label>Unused: </label><input type="checkbox"></input>
+		</div>
+		<script>
+			$(function() {
+				$('#test-container').on('click', function(event) { alert('changed');  return false; });
+			});
+		</script>
 	</body>
 </html>

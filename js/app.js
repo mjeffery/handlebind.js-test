@@ -11,6 +11,8 @@ $(document).ready(function() {
 			this.fullName =  hb.computed(function() {
 				return '<b>' + this.firstName() + ' ' + this.lastName() + '</b>';
 			}, this);
+			this.isLeader = hb.observable(false);
+			this.toggleLeader = function() { self.isLeader(!self.isLeader()); };
 			
 			this.showNested = hb.observable(true);
 			
@@ -47,6 +49,28 @@ $(document).ready(function() {
 			this.nested.setIsSelected= function() {
 				self.nested.isSelected(true);
 				console.log("set isSelected");
+			}
+			
+			this.editable = hb.observable(true);
+			this.editableToggleButtonName = hb.observable('disable');
+			this.setIsEditable = function() {
+				var value = self.editable();
+				
+				self.editable(!value);
+				self.editableToggleButtonName (!value ? 'disable' : 'enable');
+				
+				console.log('editable: ' + !value);
+			}
+			
+			this.notEditable = hb.observable(false);
+			this.notEditableToggleButtonName = hb.observable('disable');
+			this.setIsNotEditable = function() {
+				var value = self.notEditable();
+				
+				self.notEditable(!value);
+				self.notEditableToggleButtonName (!value ? 'enable' : 'disable');
+				
+				console.log('notEditable: ' + !value);
 			}
 		}
 	
