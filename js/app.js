@@ -72,6 +72,28 @@ $(document).ready(function() {
 				
 				console.log('notEditable: ' + !value);
 			}
+			
+			this.select = {
+				caption: hb.observable("Select an item..."),
+				options: hb.observableArray([{text: hb.observable('Item One')}])
+			};
+			this.select.addOption = function() {
+				console.log('adding item');
+				self.select.options.push({ 
+					text: hb.observable(),
+					focused: true //simple hack to allow auto-focusing on add
+				});
+			};
+			this.select.removeOption = function(event, item) {
+				console.log('removing item'); //TODO figure out how to get the index
+				self.select.options.remove(item);
+			};
+			
+			
+			this.select.captionText = hb.computed(function() {
+				var text = self.select.caption();
+				return _.isString(text) ? text : "";
+			});
 		}
 	
 	var viewModel = new ViewModel();

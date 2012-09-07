@@ -34,11 +34,35 @@
 			</br>
 			<a href="javascript:void(0)" {{{events click=toggleNested}}}>Toggle Nested</a></br>
 			<a href="javascript:void(0)" {{{events click=toggleColors}}}>Toggle Colors</a></br>
-			</hr>
+			<hr />
 			<textarea {{enabled editable}}></textarea>
 			<button {{events click=setIsEditable}}>{{text editableToggleButtonName}}</button></br>
 			<textarea {{disabled notEditable}}></textarea>
 			<button {{events click=setIsNotEditable}}>{{text notEditableToggleButtonName}}</button></br>
+			<hr />
+			<hr />
+			<label>Data-driven select</label>
+			{{#with select}}
+				<select>
+					<option>{{text captionText}}</option>
+					{{#each options}}
+						<option>{{text this.text}}</option>
+					{{/each}}
+				</select>
+				<hr />
+				<label>Caption Text: </label><input {{value caption update="change"}}></input><br />
+				<label>Options:</label>
+				<ul>
+					{{#each options}}
+						<li>
+							<label>Text: </label>
+							<input {{value this.text update="change"}}{{hasFocus focused}}></input>
+							<a href="javascript:void(0)" {{events click="path::$parents[3].removeOption"}}>X</a>
+						</li>
+					{{/each}}
+				</ul>
+				<a href="javascript:void(0)" {{events click=addOption}}>Add</a>
+			{{/with}}
 		</script>
 		<div id='app-container'></div></br>
 		<div id='test-container'>
