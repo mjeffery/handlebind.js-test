@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src='js/lib/underscore.js' type='text/javascript'></script>
+		<script src='js/lib/jquery.js' type='text/javascript'></script>
+		<script src='js/lib/handlebars.js' type='text/javascript'></script>
+		<script src='js/lib/humble.js' type='text/javascript'></script>
+		<script src='//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js' type='text/javascript'></script>
+		<script src='http://127.0.0.1:8888/Handlebind.js' type='text/javascript'></script>
+		<script src='js/app2.js' type='text/javascript'></script>
+	</head>
+	<body>
+		<script type="text/x-handlebars-template" id="List">
+			{{#with this symbol="List"}}
+				<h1>{{text title}}</h1>
+				<ul>
+					{{#each items}}
+						{{template "path::$List.itemTemplate" context=this}}
+					{{/each}}
+				</ul>
+				<input {{value newItem}}></input>
+				{{action addItem label="add"}}
+			{{/with}}
+		</script>
+		<script type="text/x-handlebars-template" id="Item">
+			<li>{{text this}} &#91;{{action "path::$List.removeItem" label="x"}}&#93;</li>
+		</script>
+		<script type="text/x-handlebars-template" id="Report">
+			<h3>User Details</h3>
+			<dl>
+				<dt><strong>Username</strong></dt>
+				<dd>{{text name}}</dd>
+				<dt><strong>Password</strong></dt>
+				<dd>{{text password}}</dd>
+			</dl>
+		</script>
+		<script type="text/x-handlebars-template" id="Application">
+			<ul>
+				{{#each pages}}
+					<li><a {{attrs href=link}}>{{text title}}</a></li>
+				{{/each}}
+			</ul>
+			<hr/>
+			<h1>{{text title}}</h1>
+			<hr/>
+			{{template this.template context=this.context}}
+		</script>
+		<!-- Application Container -->
+		<div id="app-container"></div>
+	</body>
+</html>
